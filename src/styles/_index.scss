@@ -1,0 +1,17 @@
+// GLOBAL
+@import "variables";
+//  >  @import './global/utils';
+//  >  @import './global/settings';
+//  >  @import './global/grid_vars';
+@import "global/grid";
+@import './global/global';
+
+// COMPONENTS
+// @import './components/index.scss';
+
+// THEME
+// UI
+@import 'theme/index';
+
+// Pages
+//@import './theme/pages/index';

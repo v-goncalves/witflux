@@ -1,0 +1,29 @@
+@import 'variables';
+
+:host {
+  ::ng-deep main.main {
+    width: 100%;
+
+    #main-content {
+      margin-top: $global-margin * 2;
+      scroll-behavior: smooth;
+      margin-right: auto;
+      margin-left: auto;
+      max-width: calc(100% - #{rem-calc(32)});
+
+      @media all and (min-width: rem-calc(1200)) {
+        max-width: calc(100% - #{rem-calc(64)});
+      }
+
+      @media all and (min-width: rem-calc(1400)) {
+        max-width: rem-calc(1400);
+      }
+
+      *:focus {
+        outline-color: var(--color-gray7, $color-gray7);
+        outline-width: 1px;
+        outline-style: dashed;
+      }
+    }
+  }
+}

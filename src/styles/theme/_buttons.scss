@@ -1,0 +1,58 @@
+/********
+* BUTTONS
+*********/
+.navigation {
+  &__link {
+    display: block;
+    color: var(--color-anchor, $color-anchor);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: var(--global-shadow, $global-shadow);
+
+    &:hover,
+    &:focus {
+      transform: scale(1.1);
+    }
+
+    &--small {
+      padding: rem-calc(8) var(--global-padding, $global-padding);
+      font-size: rem-calc(10);
+      margin: 0 rem-calc(8);
+      border-radius: rem-calc(34);
+      min-width: rem-calc(128);
+    }
+
+    &--large {
+      padding: var(--global-padding, $global-padding) rem-calc(32);
+      font-size: rem-calc(12);
+      margin: 0 rem-calc(8);
+      border-radius: rem-calc(56);
+      min-width: rem-calc(200);
+    }
+
+    &--secondary {
+      background-color: rgba(255, 255, 255, 1);
+      color: var(--color-black, $color-black);
+      border: 1px solid var(--color-white, $color-white);
+
+      &:hover,
+      &:focus  {
+        background-color: var(--color-white, $color-white);
+        border: 1px solid var(--color-select, $color-select);
+        color: var(--color-select, $color-select);
+      }
+    }
+
+    &--primary {
+      background-color: var(--color-select, $color-select);
+      border: none;
+
+      &:hover,
+      &:focus  {
+        color: var(--color-anchor-hover, $color-anchor-hover);
+      }
+    }
+  }
+}

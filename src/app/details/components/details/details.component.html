@@ -1,0 +1,47 @@
+<app-main-container>
+  <main class="main" itemscope itemtype="http://schema.org/Movie">
+    <h1 class="screen-readers" aria-live="polite">Movie details page: {{ mediaDetails?.title }}</h1>
+
+    <app-hero-details [mediaDetails]="mediaDetails"></app-hero-details>
+
+    <app-gallery-container>
+      <div id="main-content">
+
+        <section id="movie-facts" class="section row" aria-labelledby="movie-facts-title">
+          <h3 id="movie-facts-title" class="section__title col-small-12">Facts</h3>
+          <ol class="gallery__facts col-small-12" [attr.aria-label]="mediaDetails?.title + 'Movie facts'">
+            <li *ngFor="let item of mediaDetails?.movieFacts; let index = index"
+                class="grid__fact"
+                [attr.aria-label]="item.ariaLabel"
+                [attr.tabindex]="index">
+              <h4 class="grid__fact__label" tabindex="-1">{{ item.label }}</h4>
+              <p class="grid__fact__content" tabindex="-1">{{ item.value }}</p>
+            </li>
+          </ol>
+        </section>
+
+        <section id="movie-cast" class="section row" aria-labelledby="movie-cast-title">
+          <h3 id="movie-cast-title" class="section__title col-small-12">Cast</h3>
+          <ol class="gallery__cast col-small-12" aria-label="Movie Cast list">
+
+            <li *ngFor="let item of mediaDetails?.cast; let index = index"
+                class="grid__thumbnail grid__thumbnail--small">
+              <a [routerLink]="[]" [queryParams]="{castId: item.id, name: item.name}" class="grid__thumbnail__link">
+                <picture class="grid__thumbnail__image cover" *ngIf="mediaDetails?.imageBaseUrl && item?.imageFile">
+                  <source media="(min-width: 40rem)" [srcset]="mediaDetails.imageBaseUrl + 'w342' + item.imageFile">
+                  <img [src]="mediaDetails.imageBaseUrl + 'w185' + item.imageFile"
+                       width="172" height="258" [alt]="'Actor/Actress Picture: ' + item.name" />
+                </picture>
+                <div class="grid__thumbnail__meta" itemprop="actor" itemscope itemtype="http://schema.org/Person">
+                  <h4 class="title" itemprop="name">{{ item.name }}</h4>
+                  <p class="label">{{ item.character }}</p>
+                </div>
+              </a>
+            </li>
+
+          </ol>
+        </section>
+      </div>
+    </app-gallery-container>
+  </main>
+</app-main-container>

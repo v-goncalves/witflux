@@ -1,0 +1,26 @@
+@import 'variables';
+
+:host {
+
+
+
+
+  /********
+  * DETAILS PAGE
+  *********/
+  //body.details {
+  .main {
+    background-color: var(--color-white, $color-white);
+
+    #main-content {
+      color: var(--color-black, $color-black);
+    }
+
+    .section {
+      &__title {
+        color: var(--color-black, $color-black);
+      }
+    }
+  }
+
+}

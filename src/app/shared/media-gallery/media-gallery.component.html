@@ -1,0 +1,37 @@
+<app-gallery-container>
+  <section class="section row">
+    <h3 class="section__title col-small-12">{{ galleryTitle }}</h3>
+    <ol class="col-small-12"
+        [ngClass]="galleryType !== galleryTypeList.Movie ? 'gallery__videos' : 'gallery__covers'"
+        [attr.aria-label]="ariaLabel"
+    >
+      <li *ngFor="let item of gallery; let index = index"
+          class="grid__thumbnail grid__thumbnail--small"
+          [title]="item.title"
+      >
+        <a [routerLink]="['details', galleryType === galleryTypeList.Movie ? 'movie' : 'tv', item.id]"
+           class="grid__thumbnail__link">
+          <picture
+            class="grid__thumbnail__image"
+            [ngClass]="galleryType !== galleryTypeList.Movie ? 'video' : 'cover'"
+          >
+            <source media="(min-width: 40rem)" [srcset]="item.imageBaseUrl + 'w342' + item.imageFile" />
+            <img [src]="item.imageBaseUrl + 'w300' + item.imageFile"
+                 [width]="galleryType === galleryTypeList.Movie ? 172 : 352"
+                 [height]="galleryType === galleryTypeList.Movie ? 258 : 252"
+                 [alt]="item.title" />
+          </picture>
+          <div *ngIf="galleryType === galleryTypeList.Movie" class="grid__thumbnail__score">
+            <label class="label" [attr.for]="uuid + '-thumbmail-score-' + (index + 1)">
+            <span class="score"
+                  [attr.id]="uuid + '-thumbmail-score-' + (index + 1)"
+                  [attr.name]="'thumbmail-score-' + (index + 1)"
+                  [attr.aria-label]="'Movie score was ' + item.score + ' in a total of 10'"
+            >{{ item.score }}</span>
+            </label>
+          </div>
+        </a>
+      </li>
+    </ol>
+  </section>
+</app-gallery-container>

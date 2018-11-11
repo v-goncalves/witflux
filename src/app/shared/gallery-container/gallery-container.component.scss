@@ -1,0 +1,238 @@
+@import 'variables';
+
+:host {
+
+  /********
+  * GALLERY
+  *********/
+  ::ng-deep .gallery {
+    &__covers,
+    &__cast,
+    &__videos,
+    &__facts {
+      display: grid;
+      width: 100%;
+      height: auto;
+      grid-gap: rem-calc(8);
+      grid-auto-flow: row dense;
+
+      @media all and (min-width: rem-calc(640)) {
+        grid-gap: var(--global-padding, $global-padding);
+      }
+
+      @media all and (min-width: rem-calc(1024)) {
+        grid-gap: rem-calc(24);
+      }
+    }
+
+    &__covers,
+    &__cast {
+      grid-template-columns: repeat(2, 1fr);
+
+      @media all and (min-width: rem-calc(640)) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @media all and (min-width: rem-calc(1024)) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      @media all and (min-width: rem-calc(1200)) {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+
+    &__videos {
+      grid-template-columns: 1fr;
+
+      @media all and (min-width: rem-calc(640)) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media all and (min-width: rem-calc(1024)) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @media all and (min-width: rem-calc(1200)) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    &__facts {
+      grid-template-columns: repeat(2, 1fr);
+
+      @media all and (min-width: rem-calc(640)) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @media all and (min-width: rem-calc(1024)) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      @media all and (min-width: rem-calc(1200)) {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+
+    &__cast {
+      .cover {
+        &:after {
+          display: block;
+          content: '';
+          width: 100%;
+          height: 50%;
+          background-image: linear-gradient(
+              transparent 0%,
+              rgba($color-primary, 10%) 100%
+          );
+          position: absolute;
+          z-index: 0;
+          bottom: 0;
+        }
+      }
+    }
+  }
+
+  /********
+  * GALLERY GRID
+  *********/
+  ::ng-deep .grid {
+    &__thumbnail {
+      list-style-type: none;
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      &__link {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        background-color: var(--color-primary, $color-primary);
+        border-radius: rem-calc(10);
+
+        &:hover,
+        &:focus {
+          transform: scale(1.05);
+
+          img,
+          source {
+            transform: scale(1.2);
+          }
+        }
+      }
+
+      &__image {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+
+        img,
+        source {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center center;
+          min-height: rem-calc(258);
+        }
+
+        &.cover {
+          max-height: rem-calc(258);
+
+          @media all and (min-width: rem-calc(640)) {
+            max-height: rem-calc(338);
+          }
+
+          @media all and (min-width: rem-calc(1400)) {
+            max-height: rem-calc(302);
+          }
+        }
+
+        &.video {
+          max-height: rem-calc(252);
+
+          @media all and (min-width: rem-calc(1024)) {
+            max-height: rem-calc(220);
+          }
+
+          @media all and (min-width: rem-calc(1400)) {
+            max-height: rem-calc(302);
+          }
+        }
+      }
+
+      &__score {
+        top: rem-calc(16);
+        right: rem-calc(16);
+
+        .label {
+          margin: 0;
+        }
+
+        .score {
+          width: rem-calc(56);
+          padding: 0 var(--global-padding, $global-padding);
+          height: rem-calc(28);
+          border-radius: rem-calc(28);
+          background-color: #fec548;
+        }
+      }
+
+      &__score,
+      &__meta {
+        position: absolute;
+      }
+
+      &__meta {
+        right: 0;
+        left: 0;
+        bottom: rem-calc(24);
+        width: calc(100% - #{$global-padding * 1.5});
+        margin-left: auto;
+        margin-right: auto;
+
+        .title,
+        .label {
+          color: var(--color-white, $color-white);
+        }
+
+        .title {
+          margin-bottom: rem-calc(8);
+          font-size: rem-calc(18);
+        }
+
+        .label {
+          margin-bottom: 0;
+          font-size: rem-calc(12);
+        }
+      }
+    }
+
+    &__fact {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      &__label {
+        font-size: rem-calc(12);
+        text-transform: uppercase;
+        color: lighten($color-black, 40%);
+        letter-spacing: 1px;
+        margin-bottom: rem-calc(8);
+      }
+
+      &__content {
+        font-size: rem-calc(16);
+        color: $color-black;
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<app-main-container>
+  <main class="main">
+    <h1 class="screen-readers" aria-live="polite">Page: Home</h1>
+    <app-hero></app-hero>
+    <div id="main-content">
+      <app-media-gallery
+        id="top-10-movies"
+        aria-labelledby="top-10-movies-title"
+        galleryTitle="Top 10 Movies trending right now"
+        ariaLabel="Top 10 Movie list"
+        [movieGallery]="movieGallery | async"
+      ></app-media-gallery>
+
+      <app-media-gallery
+        id="recommended-tv-series"
+        aria-labelledby="recommended-tv-series-title"
+        galleryTitle="TV series recommended for you"
+        ariaLabel="List of recommended TV series"
+        [seriesGallery]="seriesGallery | async"
+      ></app-media-gallery>
+    </div>
+  </main>
+</app-main-container>

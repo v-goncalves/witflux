@@ -1,0 +1,81 @@
+@import 'variables';
+
+:host {
+  /********
+  * PAGE HEADER
+  *********/
+  .header {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: rem-calc(56);
+
+    position: fixed;
+    top: 0;
+    z-index: 2;
+
+    @media all and (min-width: rem-calc(1024)) {
+      height: rem-calc(88);
+    }
+
+    &__container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      max-width: var(--global-width, $global-width);
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+      padding-top: 0;
+      padding-left: var(--global-padding, $global-padding);
+      padding-bottom: 0;
+      padding-right: var(--global-padding, $global-padding);
+
+      @media all and (min-width: rem-calc(1200)) {
+        --global-width: calc(100% - #{rem-calc(32)});
+      }
+
+      @media all and (min-width: rem-calc(1400)) {
+        --global-width: rem-calc(1400);
+      }
+    }
+
+    &__brand,
+    &__actions {
+      display: flex;
+      margin: 0;
+    }
+
+    &__brand {
+      width: rem-calc(102);
+      height: rem-calc(24);
+
+      @media all and (min-width: rem-calc(640)) {
+        width: rem-calc(134);
+        height: rem-calc(32);
+      }
+
+      @media all and (min-width: rem-calc(1024)) {
+        width: rem-calc(172);
+        height: rem-calc(44);
+      }
+
+      .logo {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &__actions {
+      display: none;
+
+      @media all and (min-width: rem-calc(640)) {
+        display: flex;
+      }
+    }
+  }
+}

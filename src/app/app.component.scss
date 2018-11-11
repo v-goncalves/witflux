@@ -1,0 +1,24 @@
+:host {
+  > #app {
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    flex: 1;
+
+    // iphone X and upper
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+
+    > router-outlet + ::ng-deep *,
+    > ::ng-deep app-header,
+    > ::ng-deep app-footer {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+/********
+* SECTION
+*********/
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: rem-calc(56);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__title {
+    text-align: left;
+    margin-bottom: var(--global-margin, $global-margin);
+    width: 100%;
+    color: var(--color-white, $color-white);
+  }
+}

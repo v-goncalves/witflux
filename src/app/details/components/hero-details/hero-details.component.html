@@ -1,0 +1,53 @@
+<app-hero-container>
+  <article class="hero">
+    <div class="layout__container">
+      <div class="hero__content">
+        <picture class="hero__thumbnail" *ngIf="mediaDetails?.posterImageFile">
+          <source media="(max-width: 39.9375rem)" [srcset]="mediaDetails?.imageBaseUrl + 'w154' + mediaDetails?.posterImageFile">
+          <source media="(min-width: 40rem)" [srcset]="mediaDetails?.imageBaseUrl + 'w185' + mediaDetails?.posterImageFile">
+          <source media="(min-width: 64rem)" [srcset]="mediaDetails?.imageBaseUrl + 'w342' + mediaDetails?.posterImageFile">
+          <img [src]="mediaDetails?.imageBaseUrl + 'w342' + mediaDetails?.posterImageFile"
+               width="342" [alt]="'Movie Poster: ' + mediaDetails?.title" />
+        </picture>
+        <div class="hero__metadata">
+          <h2 class="hero__metadata__title"
+              *ngIf="mediaDetails?.year"
+              [attr.aria-label]="mediaDetails?.title + ', released in ' + mediaDetails?.year"
+              itemprop="name">{{ mediaDetails?.title }}<span
+            class="hero__metadata__year">&nbsp;({{ mediaDetails?.year }})</span></h2>
+          <div class="hero__metadata__score" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+            <span class="score" itemprop="ratingValue">{{ mediaDetails?.voteAverage }}</span> vote average
+          </div>
+          <p class="hero__metadata__description" itemprop="description">{{ mediaDetails?.overview }}</p>
+          <div class="row">
+            <div class="hero__metadata__crew col-small-12 col-medium-3"
+                 *ngIf="mediaDetails?.directorName"
+                 aria-describedby="crew-name-1"
+                 aria-labelledby="crew-role-1" itemprop="director" itemscope itemtype="http://schema.org/Person">
+              <h3 id="crew-name-1" class="name" property="name">{{ mediaDetails?.directorName }}</h3>
+              <h4 id="crew-role-1" class="role" >Director</h4>
+            </div>
+
+            <div class="hero__metadata__crew col-small-12 col-medium-9"
+                 *ngIf="mediaDetails?.writerName"
+                 aria-describedby="crew-name-2"
+                 aria-labelledby="crew-role-2" property="author" itemscope itemtype="http://schema.org/Person">
+              <h3 id="crew-name-2" class="name"property="name">{{ mediaDetails?.writerName }}</h3>
+              <h4 id="crew-role-2" class="role">Writer</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figure class="hero__image">
+        <picture *ngIf="mediaDetails?.backdropImageFile">
+          <source media="(max-width: 39.9375rem)" [srcset]="mediaDetails?.imageBaseUrl + 'w500' + mediaDetails?.backdropImageFile">
+          <source media="(min-width: 40rem)" [srcset]="mediaDetails?.imageBaseUrl + 'w780' + mediaDetails?.backdropImageFile">
+          <source media="(min-width: 75rem)" [srcset]="mediaDetails?.imageBaseUrl + 'w1280' + mediaDetails?.backdropImageFile">
+          <source media="(min-width: 118.75rem)" [srcset]="mediaDetails?.imageBaseUrl + 'original' + mediaDetails?.backdropImageFile">
+          <img [src]="mediaDetails?.imageBaseUrl + 'w1280' + mediaDetails?.backdropImageFile" width="640" height="640"
+               [alt]="mediaDetails?.title" />
+        </picture>
+      </figure>
+    </div>
+  </article>
+</app-hero-container>
