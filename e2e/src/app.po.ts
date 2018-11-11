@@ -5,7 +5,9 @@ export class AppPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getHomeTitle() {
+    return element(
+      by.css('#app > app-main-page > app-main-container > main > app-hero > app-hero-container > article > div > h2')
+    ).getText();
   }
 }

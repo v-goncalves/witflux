@@ -24,9 +24,9 @@ export class DetailsComponent implements OnDestroy {
     private detailsService: DetailsService
   ) {
     this.id = this.activatedRoute.snapshot.params.id;
-    const type = this.activatedRoute.snapshot.params.type;
+    const mediaType = this.activatedRoute.snapshot.params.type;
 
-    (type === 'movie' ? this.detailsService.getMovieDetails(this.id) : this.detailsService.getSeriesDetails(this.id))
+    (mediaType === 'movie' ? this.detailsService.getMovieDetails(this.id) : this.detailsService.getSeriesDetails(this.id))
       .pipe(
         takeUntil(this.ngUnsubscribe$)
       )

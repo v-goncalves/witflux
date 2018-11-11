@@ -7,8 +7,8 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display home message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to witflux!');
+    expect(page.getHomeTitle()).toEqual('All your media now lives in one place');
   });
 });
