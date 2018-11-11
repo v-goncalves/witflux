@@ -1,0 +1,46 @@
+{
+  "index": "/index.html",
+  "assetGroups": [{
+    "name": "app",
+    "installMode": "lazy",
+    "updateMode": "lazy",
+    "resources": {
+      "files": ["/favicon.ico", "/index.html"],
+      "versionedFiles": ["/*.css", "/*.js"]
+    }
+  }, {
+    "name": "assets",
+    "installMode": "lazy",
+    "updateMode": "lazy",
+    "resources": {
+      "versionedFiles": ["*.js", "*.css", "*.svg", "*.png", "*.woff", "*.woff2", "*.eot", "*.ttf"]
+    }
+  }],
+  "dataGroups": [
+    {
+      "name": "performance-cache-long-time",
+      "urls": [
+        "https://image.tmdb.org/t/p/*"
+      ],
+      "cacheConfig": {
+        "maxSize": 500,
+        "maxAge": "15d",
+        "timeout": "1s",
+        "strategy": "freshness"
+      }
+    },
+    {
+      "name": "performance-cache-short-time",
+      "urls": [
+        "https://api.themoviedb.org/*",
+        "*.js", "*.css", "*.svg", "*.png", "*.woff", "*.woff2", "*.eot", "*.ttf"
+      ],
+      "cacheConfig": {
+        "maxSize": 500,
+        "maxAge": "1h",
+        "timeout": "1s",
+        "strategy": "freshness"
+      }
+    }
+  ]
+}
