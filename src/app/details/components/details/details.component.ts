@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -9,6 +9,7 @@ import { MediaDetails } from '../../../shared/store/media.model';
   selector: 'app-details-page',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     DetailsService
   ]
@@ -21,6 +22,7 @@ export class DetailsComponent implements OnDestroy {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private changeDetectorRef: ChangeDetectorRef,
     private detailsService: DetailsService
   ) {
     this.id = this.activatedRoute.snapshot.params.id;
@@ -32,6 +34,7 @@ export class DetailsComponent implements OnDestroy {
       )
       .subscribe(detailsData => {
         this.mediaDetails = detailsData;
+        this.changeDetectorRef.detectChanges();
       });
   }
 

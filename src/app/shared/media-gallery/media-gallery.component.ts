@@ -1,11 +1,12 @@
-import { Component, Input, } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, } from '@angular/core';
 import { MediaGalleryType } from './media-gallery.model';
 import { MediaMovie, MediaSeries } from '../store/media.model';
 
 @Component({
   selector: 'app-media-gallery',
   templateUrl: './media-gallery.component.html',
-  styleUrls: ['./media-gallery.component.scss']
+  styleUrls: ['./media-gallery.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MediaGalleryComponent {
 
