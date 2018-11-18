@@ -1,3 +1,9 @@
+export enum MediaType {
+  MOVIE,
+  SERIES
+}
+
+// Series
 export interface MediaSeries {
   id: string;
   title: string;
@@ -5,10 +11,12 @@ export interface MediaSeries {
   imageFile: string;
 }
 
+// Movie
 export interface MediaMovie extends MediaSeries {
   score: string;
 }
 
+// sub-part of details
 export interface MediaCastDetails {
   id: string;
   name: string;
@@ -16,7 +24,9 @@ export interface MediaCastDetails {
   imageFile: string;
 }
 
-export interface MediaDetails {
+// media details (movie & series)
+export interface MediaDetail {
+  mediaType: MediaType;
   title: string;
   overview: string;
   year: string;

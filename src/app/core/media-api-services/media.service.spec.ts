@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HomeService } from './home.service';
+import { MediaApiService } from './media-api.service';
 
-describe('HomeService', () => {
+describe('MediaApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: HomeService = TestBed.get(HomeService);
+    const service: MediaApiService = TestBed.get(MediaApiService);
     expect(service).toBeTruthy();
   });
 });

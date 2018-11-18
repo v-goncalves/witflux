@@ -1,21 +1,39 @@
 {
   "index": "/index.html",
-  "assetGroups": [{
-    "name": "app",
-    "installMode": "lazy",
-    "updateMode": "lazy",
-    "resources": {
-      "files": ["/favicon.ico", "/index.html"],
-      "versionedFiles": ["/*.css", "/*.js"]
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "lazy",
+      "updateMode": "lazy",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html"
+        ],
+        "versionedFiles": [
+          "/*.css",
+          "/*.js"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "lazy",
+      "resources": {
+        "versionedFiles": [
+          "*.js",
+          "*.css",
+          "*.svg",
+          "*.png",
+          "*.woff",
+          "*.woff2",
+          "*.eot",
+          "*.ttf"
+        ]
+      }
     }
-  }, {
-    "name": "assets",
-    "installMode": "lazy",
-    "updateMode": "lazy",
-    "resources": {
-      "versionedFiles": ["*.js", "*.css", "*.svg", "*.png", "*.woff", "*.woff2", "*.eot", "*.ttf"]
-    }
-  }],
+  ],
   "dataGroups": [
     {
       "name": "performance-cache-long-time",
@@ -25,21 +43,26 @@
       "cacheConfig": {
         "maxSize": 500,
         "maxAge": "15d",
-        "timeout": "1s",
-        "strategy": "freshness"
+        "strategy": "performance"
       }
     },
     {
       "name": "performance-cache-short-time",
       "urls": [
         "https://api.themoviedb.org/*",
-        "*.js", "*.css", "*.svg", "*.png", "*.woff", "*.woff2", "*.eot", "*.ttf"
+        "*.js",
+        "*.css",
+        "*.svg",
+        "*.png",
+        "*.woff",
+        "*.woff2",
+        "*.eot",
+        "*.ttf"
       ],
       "cacheConfig": {
         "maxSize": 500,
         "maxAge": "1h",
-        "timeout": "1s",
-        "strategy": "freshness"
+        "strategy": "performance"
       }
     }
   ]

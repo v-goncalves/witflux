@@ -1,39 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, switchMap, } from 'rxjs/operators';
+import { switchMap, } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { MediaCastDetails, MediaDetails } from '../../shared/store/media.model';
+import { MediaCastDetails, MediaDetail, MediaType } from '../media-data.model';
 
-@Injectable()
-export class DetailsService {
+@Injectable({
+  providedIn: 'root'
+})
+export class DetailsApiService {
   private readonly apiConfiguration = environment.api;
   private readonly imageBaseUrl = this.apiConfiguration.imageBaseUrl;
   private readonly maxResultsCastItems = 10;
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {}
 
-  getMovieDetails(id: string): Observable<MediaDetails> {
-    return this.getDetails(id, this.apiConfiguration.getMovieDetails);
-  }
-
-  getSeriesDetails(id: string): Observable<MediaDetails> {
-    return this.getDetails(id, this.apiConfiguration.getSeriesDetails);
-  }
-
-  private getDetails(id: string, url): Observable<MediaDetails> {
+  getDetails(id: string, mediaType: MediaType): Observable<MediaDetail> {
+    const url = mediaType === MediaType.MOVIE ? this.apiConfiguration.getMovieDetails :
+      this.apiConfiguration.getSeriesDetails;
     return this.http.get(url.replace('<id>', id))
       .pipe(
         switchMap((data: any) => of (
-          this.parseDetails(data)
-        )),
-        catchError(() => of (null))
+          this.parseDetails(data, mediaType)
+        ))
       );
   }
 
-  private parseDetails(data: any): MediaDetails {
+  private parseDetails(data: any, mediaType: MediaType): MediaDetail {
     const releaseDate: any = this.parseReleaseDate(new Date(data.release_date || data.last_air_date));
     const language = this.parseLanguage(data);
     const budgetValue = this.parseBudgetValue(data.budget || '');
@@ -41,6 +36,7 @@ export class DetailsService {
     const cast: MediaCastDetails[] = this.parseCast(data);
 
     return {
+      mediaType: mediaType,
       title: data.original_title || data.title,
       overview: data.overview,
       year: data.release_date && new Date(data.release_date).getFullYear().toString() || '',

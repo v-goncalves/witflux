@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { MediaDetails } from '../../../shared/store/media.model';
+import { MediaDetail } from '../../../core/media-data.model';
 
 @Component({
   selector: 'app-hero-details',
@@ -8,5 +8,5 @@ import { MediaDetails } from '../../../shared/store/media.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroDetailsComponent {
-  @Input() mediaDetails: MediaDetails;
+  @Input() mediaDetails: MediaDetail;
 }

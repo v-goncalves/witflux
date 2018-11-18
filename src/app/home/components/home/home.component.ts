@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { HomeService } from '../../services/home.service';
-import { Observable } from 'rxjs';
-import { MediaMovie, MediaSeries } from '../../../shared/store/media.model';
+import { MediaMovie, MediaSeries } from '../../../core/media-data.model';
+import { Select, Store } from '@ngxs/store';
+import { MostPopularMoviesState } from '../../../core/store/most-popular-movies/most-popular-movies.state';
+import { RecommendedSeriesState } from '../../../core/store/recommended-series/recommended-series.state';
+import { GetMostPopularMovies } from '../../../core/store/most-popular-movies/most-popular-movies.actions';
+import { GetRecommendedSeries } from '../../../core/store/recommended-series/recommended-series.actions';
 
 
 @Component({
@@ -12,10 +15,12 @@ import { MediaMovie, MediaSeries } from '../../../shared/store/media.model';
 })
 export class HomeComponent {
 
-  movieGallery: Observable<MediaMovie[]> = this.homeService.getMostPopularMovies();
-  seriesGallery: Observable<MediaSeries[]> = this.homeService.getRecommendedSeries();
+  @Select(MostPopularMoviesState.selectMostPopularMovies()) movieGallery: MediaMovie[];
+  @Select(RecommendedSeriesState.selectRecommendedSeries()) seriesGallery: MediaSeries[];
 
   constructor(
-    private homeService: HomeService,
-  ) { }
+    private store: Store) {
+    this.store.dispatch(GetMostPopularMovies);
+    this.store.dispatch(GetRecommendedSeries);
+  }
 }

@@ -1,9 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DetailsApiService } from '../../../core/media-api-services/details-api.service';
+import { MediaDetail, MediaType } from '../../../core/media-data.model';
+import { Store } from '@ngxs/store';
+import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { DetailsService } from '../../services/details.service';
-import { MediaDetails } from '../../../shared/store/media.model';
+import { DetailsState } from '../../../core/store/details/details.state';
+import { GetMediaDetails } from '../../../core/store/details/details.actions';
 
 @Component({
   selector: 'app-details-page',
@@ -11,36 +14,42 @@ import { MediaDetails } from '../../../shared/store/media.model';
   styleUrls: ['./details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    DetailsService
+    DetailsApiService
   ]
 })
-export class DetailsComponent implements OnDestroy {
+export class DetailsComponent implements OnInit, OnDestroy {
 
-  mediaDetails: MediaDetails;
-  id: string;
-  private ngUnsubscribe$ = new Subject<void>();
+  mediaDetails: MediaDetail;
+  private id: string;
+  private destroy$ = new Subject();
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private changeDetectorRef: ChangeDetectorRef,
-    private detailsService: DetailsService
+    private store: Store
   ) {
     this.id = this.activatedRoute.snapshot.params.id;
-    const mediaType = this.activatedRoute.snapshot.params.type;
+    const mediaType: MediaType = this.activatedRoute.snapshot.params.type === 'movie' ? MediaType.MOVIE : MediaType.SERIES;
+    this.store
+      .dispatch(new GetMediaDetails({id: this.id, mediaType: mediaType}));
+  }
 
-    (mediaType === 'movie' ? this.detailsService.getMovieDetails(this.id) : this.detailsService.getSeriesDetails(this.id))
+  ngOnInit() {
+    this.store.select(DetailsState.selectDetailsById(this.id))
       .pipe(
-        takeUntil(this.ngUnsubscribe$)
+        takeUntil(this.destroy$),
+        // filter by distinct values (if it's the same value, it should be ignored)
+        filter(v => v && (!this.mediaDetails || JSON.stringify(this.mediaDetails) !== JSON.stringify(v)))
       )
-      .subscribe(detailsData => {
-        this.mediaDetails = detailsData;
+      .subscribe(mediaDetails => {
+        this.mediaDetails = mediaDetails;
         this.changeDetectorRef.detectChanges();
       });
   }
 
   ngOnDestroy() {
-    this.ngUnsubscribe$.next();
-    this.ngUnsubscribe$.complete();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

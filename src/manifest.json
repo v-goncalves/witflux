@@ -1,8 +1,8 @@
 {
   "name": "witflux",
   "short_name": "witflux",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "theme_color": "#112037",
+  "background_color": "#112037",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",

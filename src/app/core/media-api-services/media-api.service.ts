@@ -3,12 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { MediaMovie, MediaSeries } from '../../shared/store/media.model';
+import { MediaMovie, MediaSeries } from '../media-data.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HomeService {
+export class MediaApiService {
 
   private readonly apiConfiguration = environment.api;
   private readonly imageBaseUrl = this.apiConfiguration.imageBaseUrl;
@@ -16,7 +16,7 @@ export class HomeService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {}
 
   getMostPopularMovies(): Observable<MediaMovie[]> {
     return this.http.get(this.apiConfiguration.getMostPopularMovies)
@@ -25,8 +25,7 @@ export class HomeService {
           results
             .splice(0, this.maxResults)
             .map(item => this.parseMediaMovie(item))
-        )),
-        catchError(() => of ([]))
+        ))
       );
   }
 
@@ -37,8 +36,7 @@ export class HomeService {
           results
             .splice(0, this.maxResults)
             .map(item => this.parseMediaSeries(item))
-        )),
-        catchError(() => of ([]))
+        ))
       );
   }
 
