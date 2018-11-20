@@ -12,15 +12,16 @@
         <a [routerLink]="['details', mediaType === mediaTypeList.MOVIE ? 'movie' : 'tv', item.id]"
            (click)="prefetchItem(item.id, mediaType)"
            (mouseover)="prefetchItem(item.id, mediaType)"
-           class="grid__thumbnail__link">
+           class="grid__thumbnail__link" #link>
           <picture
             class="grid__thumbnail__image"
             [ngClass]="mediaType !== mediaTypeList.MOVIE ? 'video' : 'cover'"
           >
-            <source media="(min-width: 40rem)" [srcset]="item.imageBaseUrl + 'w342' + item.imageFile" />
-            <img [src]="item.imageBaseUrl + 'w300' + item.imageFile"
+            <source media="(min-width: 40rem)" [attr.srcset]="item.show ? (item.imageBaseUrl + 'w342' + item.imageFile) : './assets/images/placeholder-image.png'" />
+            <img [attr.src]="item.show ? (item.imageBaseUrl + 'w300' + item.imageFile) : './assets/images/placeholder-image.png'"
                  [width]="mediaType === mediaTypeList.MOVIE ? 172 : 352"
                  [height]="mediaType === mediaTypeList.MOVIE ? 258 : 252"
+                 min-hight="252px"
                  [alt]="item.title" />
           </picture>
           <div *ngIf="mediaType === mediaTypeList.MOVIE" class="grid__thumbnail__score">
