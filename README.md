@@ -28,3 +28,11 @@ Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.pr
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Build with base-href
+Run `./node_modules/.bin/ng build -c production --base-href /<your-base-href>/ && npm run build-optimizer`
+Then open `manifest.json` and add the `base-href` in `scope` and `start_url`, e.g.:
+```
+  "scope": "/angular/",
+  "start_url": "/angular/",
+```
