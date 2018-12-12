@@ -3,8 +3,8 @@
   "assetGroups": [
     {
       "name": "app",
-      "installMode": "lazy",
-      "updateMode": "lazy",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
       "resources": {
         "files": [
           "/favicon.ico",
@@ -19,17 +19,15 @@
     {
       "name": "assets",
       "installMode": "lazy",
-      "updateMode": "lazy",
+      "updateMode": "prefetch",
       "resources": {
         "versionedFiles": [
-          "*.js",
-          "*.css",
-          "*.svg",
-          "*.png",
-          "*.woff",
-          "*.woff2",
-          "*.eot",
-          "*.ttf"
+          "**/*.svg",
+          "**/*.png",
+          "**/*.woff",
+          "**/*.woff2",
+          "**/*.eot",
+          "**/*.ttf"
         ]
       }
     }
@@ -38,7 +36,10 @@
     {
       "name": "performance-cache-long-time",
       "urls": [
-        "https://image.tmdb.org/t/p/*"
+        "https://image.tmdb.org/t/p/w342/*.jpg",
+        "https://image.tmdb.org/t/p/w342//*.jpg",
+        "https://image.tmdb.org/t/p/w500/*.jpg",
+        "https://image.tmdb.org/t/p/w500//*.jpg"
       ],
       "cacheConfig": {
         "maxSize": 500,
